@@ -14,10 +14,23 @@
     <title>STOPWATCH</title>
   </head>
   <body>
-    <header>
+    <header class="bg-primary">
       <div>
-        <div></div>
-        <nav>
+        <div>
+          <h1 class="p-5 mb-2 bg-primary text-white text-center">STOPWATCH</h1>
+        </div>
+        <nav
+          class="
+            bg-white
+            d-flex
+            flex-row
+            mx-auto
+            justify-content-around
+            pt-4
+            pb-2
+            container-sm
+          "
+        >
           <div>STOPWATCH</div>
           <div>TIMER</div>
           <div>POMODORO</div>
@@ -25,11 +38,41 @@
       </div>
     </header>
 
-    <main>
-      <div id="root">
-        <div id="stopwatch-display"></div>
-        <div id="stopwatch-button-panel"></div>
-        <div id="Laps-panel"></div>
+    <main class="bg-light" class="pb-3 mt-3">
+      <div id="root" class="bg-white container-sm mx-auto mb-3">
+        <div
+          id="stopwatch-display"
+          class="text-center p-3 mb-3 d-flex flex-row justify-content-evenly"
+        >
+          <div class="pr-3">
+            <span id="stopwatch-HRS" class="fs-1">00</span>
+            <span> HRS </span>
+          </div>
+          <div class="pr-3">
+            <span id="stopwatch-MIN" class="fs-1">00</span>
+            <span class=""> MIN </span>
+          </div>
+          <div class="pr-3">
+            <span id="stopwatch-SEC" class="fs-1">00</span>
+            <span> SEC </span>
+          </div>
+          <div class="pr-3">
+            <span id="stopwatch-MS" class="fs-1">000</span>
+            <span> MS</span>
+          </div>
+        </div>
+
+        <div
+          id="stopwatch-button-panel"
+          class="d-flex flex-row justify-content-center"
+        >
+          <button type="button" class="btn btn-outline-primary">Start</button>
+          <button type="button" class="btn btn-outline-primary">Pause</button>
+          <button type="button" class="btn btn-outline-primary">Add Lap</button>
+          <button type="button" class="btn btn-outline-primary">Reset</button>
+        </div>
+
+        <div id="Laps-panel" class="d-flex justify-content-center">c</div>
       </div>
     </main>
 
