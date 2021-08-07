@@ -49,8 +49,6 @@ export const renderStopwatch = () => {
 
     rootDiv.appendChild(stopwatchTab());
   }
-
-  console.log('rendering Stopwatch');
 };
 
 const removeActiveClass = () => {

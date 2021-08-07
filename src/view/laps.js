@@ -1,8 +1,8 @@
 import { state } from '../data.js';
 
-export const renderLaps = () => {
-  const lapsDisplay = document.getElementById('Laps-panel');
-
+export const renderLaps = (
+  lapsDisplay = document.getElementById('Laps-panel')
+) => {
   while (lapsDisplay.lastElementChild) {
     lapsDisplay.removeChild(lapsDisplay.lastElementChild);
   }
