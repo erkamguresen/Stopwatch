@@ -27,7 +27,6 @@ export const stopwatchHandler = (event) => {
       break;
 
     default:
-      console.log(event.target);
       break;
   }
 };
