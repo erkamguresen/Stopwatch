@@ -1,22 +1,29 @@
+import {
+  startStopWatch,
+  pauseStopWatch,
+  resetStopWatch,
+  addLapStopWatch,
+} from '../view/stopwatch.js';
+
 export const stopwatchHandler = (event) => {
   event.preventDefault();
   event.stopPropagation();
 
   switch (event.target.id) {
     case 'stopwatch-start-button':
-      console.log(event.target.id);
+      startStopWatch();
       break;
 
     case 'stopwatch-pause-button':
-      console.log(event.target.id);
+      pauseStopWatch();
       break;
 
     case 'stopwatch-reset-button':
-      console.log(event.target.id);
+      resetStopWatch();
       break;
 
     case 'stopwatch-add-lap-button':
-      console.log(event.target.id);
+      addLapStopWatch();
       break;
 
     default:

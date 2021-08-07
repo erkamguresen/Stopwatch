@@ -1,3 +1,4 @@
 export const state = {
-  isStopwatchCounting: false,
+  stopwatchStartTime: null,
+  laps: [],
 };
