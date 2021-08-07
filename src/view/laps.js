@@ -1,3 +1,4 @@
+import { createDivElement } from '../components/shared/divElement.js';
 import { state } from '../data.js';
 
 export const renderLaps = (
@@ -17,11 +18,17 @@ export const renderLaps = (
 
     lapsDisplay.appendChild(titleEl);
 
-    lapsDisplay.appendChild(
+    const listDiv = createDivElement('align-self-center');
+    lapsDisplay.appendChild(listDiv);
+
+    listDiv.appendChild(
       state.laps
         .map((lap) => {
           const liEl = document.createElement('li');
-          liEl.innerText = `${lap.hours} : ${lap.minutes} : ${lap.seconds} : ${lap.milliseconds}`;
+          liEl.innerHTML = `
+            <span>
+              ${lap.hours} : ${lap.minutes} : ${lap.seconds} : ${lap.milliseconds}
+            </span>`;
           return liEl;
         })
         .reduce((olEl, liEl) => {

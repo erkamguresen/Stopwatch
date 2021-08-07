@@ -43,12 +43,12 @@ export const renderStopwatch = () => {
   if (!stopwatchEl.classList.contains('active')) {
     removeActiveClass();
 
-    emptyRootDiv();
-
     stopwatchEl.classList.add('active');
-
-    rootDiv.appendChild(stopwatchTab());
   }
+
+  emptyRootDiv();
+
+  rootDiv.appendChild(stopwatchTab());
 };
 
 const removeActiveClass = () => {

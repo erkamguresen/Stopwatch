@@ -1,4 +1,5 @@
 import { state } from '../data.js';
+import { renderStopwatch } from '../init/routes.js';
 import { getFormattedTime } from '../logic/timeformat.js';
 import { renderLaps } from './laps.js';
 
@@ -48,20 +49,22 @@ export const pauseStopWatch = () => {
 export const resetStopWatch = () => {
   state.resetStopWatch();
 
-  // hide pause button
-  const pauseButton = document.getElementById('stopwatch-pause-button');
-  pauseButton.style.display = 'none';
+  renderStopwatch();
 
-  // show start button
-  const startButton = document.getElementById('stopwatch-start-button');
-  startButton.style.display = 'block';
+  // // hide pause button
+  // const pauseButton = document.getElementById('stopwatch-pause-button');
+  // pauseButton.style.display = 'none';
 
-  clearInterval(displayInterval);
+  // // show start button
+  // const startButton = document.getElementById('stopwatch-start-button');
+  // startButton.style.display = 'block';
 
-  resetStopWatchDisplay();
-  renderLaps();
+  // clearInterval(displayInterval);
 
-  console.log(state);
+  // resetStopWatchDisplay();
+  // renderLaps();
+
+  // console.log(state);
 };
 
 export const addLapStopWatch = () => {

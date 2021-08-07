@@ -11,3 +11,7 @@ button {
 main {
   background-color: #e8e8e8;
 }
+
+ol li span {
+  margin-left: 20px;
+}
