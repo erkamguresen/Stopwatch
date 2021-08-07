@@ -7,7 +7,3 @@ document
   .addEventListener('click', navigationHandler);
 
 document.getElementById('root').appendChild(stopwatchTab());
-
-document
-  .getElementById('stopwatch-button-panel')
-  .addEventListener('click', stopwatchHandler);
