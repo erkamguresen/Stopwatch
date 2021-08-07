@@ -1,9 +1,9 @@
 export const getFormattedTime = (date) => {
   const formattedTime = {
-    milliseconds: date.getMilliseconds().toString(),
-    seconds: date.getSeconds().toString(),
-    minutes: date.getMinutes().toString(),
-    hours: (date.getHours() - 1).toString(),
+    milliseconds: date.getUTCMilliseconds().toString(),
+    seconds: date.getUTCSeconds().toString(),
+    minutes: date.getUTCMinutes().toString(),
+    hours: date.getUTCHours().toString(),
   };
 
   while (formattedTime.milliseconds.length < 3) {

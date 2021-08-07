@@ -1,11 +1,16 @@
 import { state } from '../data.js';
 import { getFormattedTime } from '../logic/timeformat.js';
+import { renderLaps } from './laps.js';
 
-let interval;
+let displayInterval;
 
 export const startStopWatch = () => {
-  state.stopwatchStartTime = Date.now();
-  state.isStopwatchCounting = true;
+  if (state.stopwatchStartTime === null) {
+    state.stopwatchStartTime = Date.now();
+  } else {
+    state.stopwatchStartTime = Date.now() - state.totalPassedTime;
+    state.totalPassedTime = null;
+  }
 
   // hide start button
   const startButton = document.getElementById('stopwatch-start-button');
@@ -15,16 +20,26 @@ export const startStopWatch = () => {
   const pauseButton = document.getElementById('stopwatch-pause-button');
   pauseButton.style.display = 'block';
 
-  interval = setInterval(renderStopWatchDisplay, 11);
+  displayInterval = setInterval(renderStopWatchDisplay, 11);
 };
 
 export const pauseStopWatch = () => {
-  state.isStopwatchCounting = false;
-  clearInterval(interval);
+  // hide pause button
+  const pauseButton = document.getElementById('stopwatch-pause-button');
+  pauseButton.style.display = 'none';
+
+  // show start button
+  const startButton = document.getElementById('stopwatch-start-button');
+  startButton.style.display = 'block';
+
+  state.totalPassedTime = Date.now() - state.stopwatchStartTime;
+
+  clearInterval(displayInterval);
 };
 
 export const resetStopWatch = () => {
   state.stopwatchStartTime = null;
+  state.totalPassedTime = null;
   state.laps = [];
 
   // hide pause button
@@ -36,9 +51,31 @@ export const resetStopWatch = () => {
   startButton.style.display = 'block';
 
   resetStopWatchDisplay();
+  renderLaps();
 };
 
-export const addLapStopWatch = () => {};
+export const addLapStopWatch = () => {
+  let lapTime;
+  let formattedLapTime;
+
+  if (state.totalPassedTime === null) {
+    lapTime = new Date(Date.now() - state.stopwatchStartTime);
+
+    formattedLapTime = getFormattedTime(lapTime);
+
+    state.laps.push(formattedLapTime);
+
+    renderLaps();
+  } else {
+    lapTime = new Date(state.totalPassedTime);
+
+    formattedLapTime = getFormattedTime(lapTime);
+
+    state.laps.push(formattedLapTime);
+
+    renderLaps();
+  }
+};
 
 const renderStopWatchDisplay = () => {
   const stopwatchHRS = document.getElementById('stopwatch-HRS');

@@ -55,7 +55,7 @@ export const stopwatchTab = () => {
           id="Laps-panel"
           class="d-flex flex-column justify-content-center my-5 p-5 text-center"
         >
-          <h5 class="mb-">Laps</h5>
+          <h5 class="mb-3">Laps</h5>
           <p>To add a lap, press the "Add Lap" button.</p>
         </div>`;
 
