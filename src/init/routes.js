@@ -1,6 +1,8 @@
 import { stopwatchTab } from '../components/pages/stopwatch-tab.js';
 import { timerTab } from '../components/pages/timer-tab.js';
 import { pomodoroTab } from '../components/pages/pomodoro-tab.js';
+import { state } from '../data.js';
+import { renderStopWatchDisplay } from '../view/stopwatch.js';
 
 export const renderTimer = () => {
   console.log('rendering Timer');
@@ -49,6 +51,14 @@ export const renderStopwatch = () => {
   emptyRootDiv();
 
   rootDiv.appendChild(stopwatchTab());
+
+  if (state.totalPassedTime !== null) {
+    console.log(state);
+    console.log(new Date(state.totalPassedTime));
+    renderStopWatchDisplay(
+      new Date(state.stopwatchStartTime + state.totalPassedTime)
+    );
+  }
 };
 
 const removeActiveClass = () => {

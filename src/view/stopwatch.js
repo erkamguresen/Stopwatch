@@ -47,22 +47,11 @@ export const pauseStopWatch = () => {
 };
 
 export const resetStopWatch = () => {
+  clearInterval(displayInterval);
+
   state.resetStopWatch();
 
   renderStopwatch();
-
-  // // hide pause button
-  // const pauseButton = document.getElementById('stopwatch-pause-button');
-  // pauseButton.style.display = 'none';
-
-  // // show start button
-  // const startButton = document.getElementById('stopwatch-start-button');
-  // startButton.style.display = 'block';
-
-  // clearInterval(displayInterval);
-
-  // resetStopWatchDisplay();
-  // renderLaps();
 
   // console.log(state);
 };
@@ -96,7 +85,7 @@ export const addLapStopWatch = () => {
   }
 };
 
-const renderStopWatchDisplay = (time = Date.now()) => {
+export const renderStopWatchDisplay = (time = Date.now()) => {
   const stopwatchHRS = document.getElementById('stopwatch-HRS');
   const stopwatchMIN = document.getElementById('stopwatch-MIN');
   const stopwatchSEC = document.getElementById('stopwatch-SEC');

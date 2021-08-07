@@ -70,7 +70,5 @@ export const stopwatchTab = () => {
     pauseButton.style.display = 'none';
   }
 
-  // stopwatchDisplayEl
-
   return stopwatchTabDiv;
 };
