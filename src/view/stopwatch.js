@@ -46,10 +46,7 @@ export const pauseStopWatch = () => {
 };
 
 export const resetStopWatch = () => {
-  state.stopwatchStartTime = null;
-  state.totalPassedTime = null;
-  state.laps = [];
-  state.isStopwatchRunning = false;
+  state.resetStopWatch();
 
   // hide pause button
   const pauseButton = document.getElementById('stopwatch-pause-button');

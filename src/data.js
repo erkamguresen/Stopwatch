@@ -3,4 +3,12 @@ export const state = {
   isStopwatchRunning: false,
   totalPassedTime: null, //updates when paused or reset
   laps: [], // in milliseconds from start
+
+  // reset
+  resetStopWatch: function () {
+    state.stopwatchStartTime = null;
+    state.isStopwatchRunning = false;
+    state.totalPassedTime = null;
+    state.laps = [];
+  },
 };
