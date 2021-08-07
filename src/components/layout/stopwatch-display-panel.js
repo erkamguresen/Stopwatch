@@ -17,9 +17,9 @@ export const stopwatchDisplayPanel = () => {
 const createTimeDiv = (id = '', abbreviation = '', defaultText = '') => {
   const divElement = createDivElement('p-3');
 
-  const timeElement = document.createElement('span');
+  const timeElement = document.createElement('code');
   timeElement.id = id;
-  timeElement.className = 'fs-1';
+  timeElement.className = 'stopwatchDisplay fs-1 text-dark';
   timeElement.innerText = defaultText;
   divElement.appendChild(timeElement);
 
