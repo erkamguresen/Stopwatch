@@ -25,7 +25,6 @@ export const renderLaps = () => {
           return liEl;
         })
         .reduce((olEl, liEl) => {
-          console.log(olEl, liEl);
           olEl.appendChild(liEl);
           return olEl;
         }, document.createElement('ol'))

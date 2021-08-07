@@ -32,7 +32,11 @@ export const pauseStopWatch = () => {
   const startButton = document.getElementById('stopwatch-start-button');
   startButton.style.display = 'block';
 
-  state.totalPassedTime = Date.now() - state.stopwatchStartTime;
+  const pauseTime = Date.now();
+
+  renderStopWatchDisplay(pauseTime);
+
+  state.totalPassedTime = pauseTime - state.stopwatchStartTime;
 
   clearInterval(displayInterval);
 };
@@ -79,14 +83,14 @@ export const addLapStopWatch = () => {
   }
 };
 
-const renderStopWatchDisplay = () => {
+const renderStopWatchDisplay = (time = Date.now()) => {
   const stopwatchHRS = document.getElementById('stopwatch-HRS');
   const stopwatchMIN = document.getElementById('stopwatch-MIN');
   const stopwatchSEC = document.getElementById('stopwatch-SEC');
   const stopwatchMS = document.getElementById('stopwatch-MS');
 
   const displayDate = getFormattedTime(
-    new Date(Date.now() - state.stopwatchStartTime)
+    new Date(time - state.stopwatchStartTime)
   );
 
   stopwatchMS.innerText = displayDate.milliseconds;
