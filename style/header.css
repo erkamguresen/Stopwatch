@@ -7,5 +7,12 @@ nav {
 
 nav .active {
   color: blue;
-  border-bottom: solid 1px #e9ecef;
+  border-bottom: solid 1px blue;
+}
+
+nav :hover {
+  font-weight: bold;
+  color: blue;
+  border-bottom: solid 1px blue;
+  cursor: pointer;
 }

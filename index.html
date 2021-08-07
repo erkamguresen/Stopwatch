@@ -19,6 +19,7 @@
     <title>STOPWATCH</title>
   </head>
   <body>
+    <!-- Heaader Part -->
     <header class="bg-primary">
       <div>
         <div>
@@ -40,66 +41,21 @@
             container-sm
           "
         >
-          <div id="stopwatch-tab" class="border-bottom border-secondary">
-            STOPWATCH
-          </div>
+          <div id="stopwatch-tab" class="active">STOPWATCH</div>
           <div id="timer-tab">TIMER</div>
           <div id="pomodoro-tab">POMODORO</div>
         </nav>
       </div>
     </header>
 
-    <main class="bg-light pb-3">
-      <div id="root" class="bg-white container-sm mx-auto mb-3">
-        <div
-          id="stopwatch-display"
-          class="text-center p-5 mb-2 d-flex flex-row justify-content-center"
-        >
-          <div class="p-3">
-            <span id="stopwatch-HRS" class="fs-1">00</span>
-            <span> HRS </span>
-          </div>
-          <div class="p-3">
-            <span id="stopwatch-MIN" class="fs-1">00</span>
-            <span class=""> MIN </span>
-          </div>
-          <div class="p-3">
-            <span id="stopwatch-SEC" class="fs-1">00</span>
-            <span> SEC </span>
-          </div>
-          <div class="p-3">
-            <span id="stopwatch-MS" class="fs-1">000</span>
-            <span> MS</span>
-          </div>
-        </div>
-
-        <div
-          id="stopwatch-button-panel"
-          class="d-flex flex-row justify-content-center my-2 p-2"
-        >
-          <button type="button" class="btn btn-outline-primary">Start</button>
-          <button
-            type="button"
-            class="btn btn-outline-primary"
-            style="display: none"
-          >
-            Pause
-          </button>
-          <button type="button" class="btn btn-outline-primary">Add Lap</button>
-          <button type="button" class="btn btn-outline-primary">Reset</button>
-        </div>
-
-        <div
-          id="Laps-panel"
-          class="d-flex flex-column justify-content-center my-5 p-5 text-center"
-        >
-          <h5 class="mb-">Laps</h5>
-          <p>To add a lap, press the "Add Lap" button.</p>
-        </div>
-      </div>
+    <!-- Main Body Content -->
+    <main class="bg--light pb-3">
+      <!-- root container content-->
+      <div id="root" class="bg-white container-sm mx-auto mb-3"></div>
     </main>
 
+    <!-- Footer Content -->
     <footer></footer>
-    <script src="./src/init.js" type="module"></script>
+    <script src="./src/init/init.js" type="module"></script>
   </body>
 </html>
