@@ -4,3 +4,8 @@ nav {
   max-width: 720px !important;
   border-bottom: solid 1px #e9ecef;
 }
+
+nav .active {
+  color: blue;
+  border-bottom: solid 1px #e9ecef;
+}
