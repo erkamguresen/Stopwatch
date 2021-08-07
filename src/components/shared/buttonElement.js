@@ -2,6 +2,7 @@
  * This function creates a new button element
  * and returns it with specified properties.
  *
+ * @param {string} text - The text to display on the button
  * @param {string} type - the type of the button, default value is 'button'.
  * @param {string} classes - names of classes for the element to be added.
  * @param {string} id - unique id for the element

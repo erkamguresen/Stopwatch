@@ -20,7 +20,7 @@ export const startStopWatch = () => {
   const pauseButton = document.getElementById('stopwatch-pause-button');
   pauseButton.style.display = 'block';
 
-  displayInterval = setInterval(renderStopWatchDisplay, 11);
+  displayInterval = setInterval(renderStopWatchDisplay, 13);
 };
 
 export const pauseStopWatch = () => {
