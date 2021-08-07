@@ -50,6 +50,8 @@ export const resetStopWatch = () => {
   const startButton = document.getElementById('stopwatch-start-button');
   startButton.style.display = 'block';
 
+  clearInterval(displayInterval);
+
   resetStopWatchDisplay();
   renderLaps();
 };
