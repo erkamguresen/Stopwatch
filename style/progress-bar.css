@@ -25,4 +25,15 @@
 /* html
  <div class="chart">
   <div class='circle'></div>
-</div> */
+</div> 
+
+JS:
+
+const circle = document.querySelector('.chart');
+
+let percentage = 40;
+
+circle.style.background = `conic-gradient(red ${percentage}%, white 0)`;
+
+
+*/
