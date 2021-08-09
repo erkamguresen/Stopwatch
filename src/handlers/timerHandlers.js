@@ -1,5 +1,10 @@
 import { checkTimerSettings } from '../logic/timeformat.js';
-import { pauseTimer, resetTimer, startTimer } from '../view/timer-view.js';
+import {
+  pauseTimer,
+  reRenderTimerPanel,
+  resetTimer,
+  startTimer,
+} from '../view/timer-view.js';
 
 export const timerButtonHandler = (event) => {
   event.preventDefault();
@@ -31,7 +36,6 @@ export const timerEditHandler = (event) => {
     case 'dblclick':
       if (event.target.tagName === 'CODE') {
         event.target.setAttribute('contentEditable', true);
-        console.log('edit enabled');
       }
 
       break;
@@ -40,10 +44,9 @@ export const timerEditHandler = (event) => {
       if (event.target.tagName === 'CODE') {
         event.target.setAttribute('contentEditable', true);
 
-        //  check the edited thing
         checkTimerSettings();
-        //TODO reRenderTimerPanel();
-        console.log('edit disabled');
+
+        reRenderTimerPanel();
       }
 
       break;

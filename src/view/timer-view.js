@@ -16,3 +16,13 @@ export const pauseTimer = () => {
 export const resetTimer = () => {
   console.log('timer reseted');
 };
+
+export const reRenderTimerPanel = (
+  hours = state.timerSettings.hours,
+  minutes = state.timerSettings.minutes,
+  seconds = state.timerSettings.seconds
+) => {
+  document.getElementById('timer-HRS').innerText = hours;
+  document.getElementById('timer-MIN').innerText = minutes;
+  document.getElementById('timer-SEC').innerText = seconds;
+};

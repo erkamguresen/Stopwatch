@@ -1,5 +1,7 @@
+import { getFormattedRemainingTimerTime } from '../../logic/timeformat.js';
+import { createCodeElement } from '../shared/codeElement.js';
 import { createDivElement } from '../shared/divElement.js';
-import { createTimeDiv } from '../shared/timeDivElement.js';
+import { createSpanElement } from '../shared/spanElement.js';
 
 export const timerDisplayPanel = () => {
   const displayPanel = createDivElement(
@@ -14,26 +16,13 @@ export const timerDisplayPanel = () => {
   );
   countDownChart.appendChild(countDownCircle);
 
-  const timerClock = createDivElement(
-    'justify-content-center align-self-center',
-    'timer-clock'
-  );
-
-  timerClock.innerHTML = `<code 
-  id='timer-HRS'
-  class= 'stopwatchDisplay fs-1 text-dark'>00</code>
-  <span class='fs-3'> : </span><code 
-  id='timer-MIN'
-  
-  class= 'stopwatchDisplay fs-1 text-dark'>00</code><span class='fs-3'> : </span><code 
-  id='timer-SEC' 
-  class= 'stopwatchDisplay fs-1 text-dark'>00</code>`;
+  const timerClock = createTimerClock();
 
   const timerText = createDivElement(
     'justify-content-center align-self-center',
     'timer-text'
   );
-  timerText.innerHTML = `<span class='fs-3'>HRS : MIN : SEC</span>`;
+  timerText.innerHTML = `<span class='timerAbbs fs-5'>HRS : MIN : SEC</span>`;
 
   countDownCircle.appendChild(timerClock);
   countDownCircle.appendChild(timerText);
@@ -41,4 +30,45 @@ export const timerDisplayPanel = () => {
   displayPanel.appendChild(countDownChart);
 
   return displayPanel;
+};
+
+const createTimerClock = () => {
+  const timerClock = createDivElement(
+    'justify-content-center align-self-center',
+    'timer-clock'
+  );
+
+  const formattedTimer = getFormattedRemainingTimerTime();
+
+  console.log('formattedTimer', formattedTimer);
+
+  timerClock.appendChild(
+    createCodeElement(
+      'timerDisplay fs-1 text-dark',
+      'timer-HRS',
+      formattedTimer.hours
+    )
+  );
+
+  timerClock.appendChild(createSpanElement('fs-1', '', ` : `));
+
+  timerClock.appendChild(
+    createCodeElement(
+      'timerDisplay fs-1 text-dark',
+      'timer-MIN',
+      formattedTimer.minutes
+    )
+  );
+
+  timerClock.appendChild(createSpanElement('fs-1', '', ` : `));
+
+  timerClock.appendChild(
+    createCodeElement(
+      'timerDisplay fs-1 text-dark',
+      'timer-SEC',
+      formattedTimer.seconds
+    )
+  );
+
+  return timerClock;
 };

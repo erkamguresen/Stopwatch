@@ -21,4 +21,10 @@ ol li span {
     font-size: 3rem !important;
     margin-right: 10px !important;
   }
+  .timerDisplay {
+    font-size: 3rem !important;
+  }
+  .timerAbbs {
+    font-size: 1.75rem !important;
+  }
 }
