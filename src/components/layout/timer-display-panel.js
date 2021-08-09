@@ -38,10 +38,6 @@ export const timerDisplayPanel = () => {
   countDownCircle.appendChild(timerClock);
   countDownCircle.appendChild(timerText);
 
-  // countDownCircle.appendChild(createTimeDiv('stopwatch-HRS', 'HRS', '00'));
-  // countDownCircle.appendChild(createTimeDiv('stopwatch-MIN', 'MIN', '00'));
-  // countDownCircle.appendChild(createTimeDiv('stopwatch-SEC', 'SEC', '00'));
-
   displayPanel.appendChild(countDownChart);
 
   return displayPanel;

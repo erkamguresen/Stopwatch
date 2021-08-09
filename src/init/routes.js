@@ -5,8 +5,6 @@ import { state } from '../data.js';
 import { renderStopWatchDisplay } from '../view/stopwatch.js';
 
 export const renderTimer = () => {
-  console.log('rendering Timer');
-
   const timerEl = document.getElementById('timer-tab');
   const rootDiv = document.getElementById('root');
 

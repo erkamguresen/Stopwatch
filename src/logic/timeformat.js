@@ -1,3 +1,5 @@
+import { state } from '../data.js';
+
 export const getFormattedTime = (date) => {
   const formattedTime = {
     milliseconds: date.getUTCMilliseconds().toString(),
@@ -23,4 +25,39 @@ export const getFormattedTime = (date) => {
   }
 
   return formattedTime;
+};
+
+export const checkTimerSettings = () => {
+  const hrsElement = document.getElementById('timer-HRS');
+  const minElement = document.getElementById('timer-MIN');
+  const secElement = document.getElementById('timer-SEC');
+
+  // TODO check the time ranges
+  const hrs = parseInt(hrsElement.innerText);
+  if (Number.isInteger(hrs)) {
+    state.timerSettings.hours = hrs;
+  } else {
+    state.timerSettings.hours = 0;
+  }
+
+  const min = parseInt(minElement.innerText);
+  if (Number.isInteger(min)) {
+    state.timerSettings.minutes = min;
+  } else {
+    state.timerSettings.minutes = 0;
+  }
+
+  const sec = parseInt(secElement.innerText);
+  if (Number.isInteger(sec)) {
+    state.timerSettings.seconds = sec;
+  } else {
+    state.timerSettings.seconds = 0;
+  }
+
+  state.timerSettings.totalSeconds =
+    state.timerSettings.seconds +
+    60 * state.timerSettings.minutes +
+    60 * 60 * state.timerSettings.hours;
+
+  console.log(state.timerSettings);
 };
