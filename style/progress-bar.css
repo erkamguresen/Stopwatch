@@ -1,5 +1,5 @@
 @property --percentage {
-  initial-value: 70%;
+  initial-value: 100%;
   inherits: false;
   syntax: '<percentage>';
 }
@@ -7,15 +7,15 @@
 .chart {
   background: conic-gradient(DarkTurquoise var(--percentage), white 0);
   border-radius: 50%;
-  width: 404px;
-  height: 404px;
+  width: 304px;
+  height: 304px;
 }
 
 .circle {
   background: white;
   /*   border:1px solid yellow; */
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   position: relative;
   top: 2px;

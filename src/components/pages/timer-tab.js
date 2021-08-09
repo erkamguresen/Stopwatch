@@ -4,7 +4,7 @@ import { createDivElement } from '../shared/divElement.js';
 
 export const timerTab = () => {
   const timerTabDiv = document.createElement('div');
-  timerTabDiv.className = 'my-3 text-center';
+  timerTabDiv.className = 'mb-3 text-center';
 
   const timerDisplayEl = timerDisplayPanel();
   timerTabDiv.appendChild(timerDisplayEl);
