@@ -27,6 +27,12 @@ export const startStopWatch = () => {
 };
 
 export const pauseStopWatch = () => {
+  const pauseTime = Date.now();
+
+  clearInterval(displayInterval);
+
+  state.isStopwatchRunning = false;
+
   // hide pause button
   const pauseButton = document.getElementById('stopwatch-pause-button');
   pauseButton.style.display = 'none';
@@ -35,15 +41,9 @@ export const pauseStopWatch = () => {
   const startButton = document.getElementById('stopwatch-start-button');
   startButton.style.display = 'block';
 
-  const pauseTime = Date.now();
-
   renderStopWatchDisplay(pauseTime);
 
   state.totalPassedTime = pauseTime - state.stopwatchStartTime;
-
-  clearInterval(displayInterval);
-
-  state.isStopwatchRunning = false;
 };
 
 export const resetStopWatch = () => {

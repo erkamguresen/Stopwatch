@@ -1,17 +1,10 @@
-import { state } from "../data.js";
-import { getFormattedTime } from "../logic/timeformat.js";
-import { getTimerRingColor } from "../logic/timer-color.js";
+import { state } from '../data.js';
+import { getFormattedTime } from '../logic/timeformat.js';
+import { getTimerRingColor } from '../logic/timer-color.js';
 
 let timerDisplayInterval;
 
 export const startTimer = () => {
-  console.log(
-    "timer started ",
-    state.timerSettings.hours,
-    state.timerSettings.minutes,
-    state.timerSettings.seconds
-  );
-
   if (state.timerStartTime === null) {
     state.timerStartTime = Date.now();
   } else {
@@ -22,20 +15,21 @@ export const startTimer = () => {
   state.isTimerRunning = true;
 
   // hide start button
-  const startButton = document.getElementById("timer-start-button");
-  startButton.style.display = "none";
+  const startButton = document.getElementById('timer-start-button');
+  startButton.style.display = 'none';
 
   // show pause button
-  const pauseButton = document.getElementById("timer-pause-button");
-  pauseButton.style.display = "block";
+  const pauseButton = document.getElementById('timer-pause-button');
+  pauseButton.style.display = 'block';
 
   timerDisplayInterval = setInterval(renderTimerDisplay, 50);
 };
 
 const renderTimerDisplay = (time = Date.now()) => {
-  const timerHRS = document.getElementById("timer-HRS");
-  const timerMIN = document.getElementById("timer-MIN");
-  const timerSEC = document.getElementById("timer-SEC");
+  const timerHRS = document.getElementById('timer-HRS');
+  const timerMIN = document.getElementById('timer-MIN');
+  const timerSEC = document.getElementById('timer-SEC');
+  const timerChartElement = document.getElementById('timer-chart');
 
   state.timerTotalPassedMilliseconds = time - state.timerStartTime;
 
@@ -46,27 +40,26 @@ const renderTimerDisplay = (time = Date.now()) => {
     )
   );
 
-  if (timerSEC) timerSEC.innerText = displayDate.seconds;
-  if (timerMIN) timerMIN.innerText = displayDate.minutes;
-  if (timerHRS) timerHRS.innerText = displayDate.hours;
+  if (timerSEC && timerMIN && timerHRS && timerChartElement) {
+    console.log(displayDate);
 
-  let percentage =
-    100 -
-    (state.timerTotalPassedMilliseconds /
-      state.timerSettings.getTotalMiliSeconds()) *
-      100;
+    timerHRS.innerText = displayDate.hours;
+    timerMIN.innerText = displayDate.minutes;
+    timerSEC.innerText = displayDate.seconds;
 
-  const ringColor = getTimerRingColor();
-  console.log(typeof ringColor);
-  console.log(`conic-gradient(
-    rgb(${ringColor.red}, 
-      ${ringColor.green}, 
-      ${ringColor.blue}) ${percentage}%, white 0)`);
-  const timerChartElement = document.getElementById("timer-chart");
-  timerChartElement.style.background = `conic-gradient(
+    let percentage =
+      100 -
+      (state.timerTotalPassedMilliseconds /
+        state.timerSettings.getTotalMiliSeconds()) *
+        100;
+
+    const ringColor = getTimerRingColor();
+
+    timerChartElement.style.background = `conic-gradient(
     rgb(${ringColor.red}, 
       ${ringColor.green}, 
       ${ringColor.blue}) ${percentage}%, white 0)`;
+  }
 
   if (
     state.timerSettings.getTotalMiliSeconds() -
@@ -81,18 +74,44 @@ const renderTimerDisplay = (time = Date.now()) => {
 };
 
 const alertTimerFinished = () => {
-  console.log("Time is up !");
-  alertify.alert("Timer Alert", "Time is up !", function () {
+  alertify.alert('Timer Alert', 'Time is up !', function () {
     state.resetTimer();
     reRenderTimerPanel();
+
+    const pauseButton = document.getElementById('timer-pause-button');
+    const startButton = document.getElementById('timer-start-button');
+
+    if (pauseButton && startButton) {
+      // hide pause button
+      pauseButton.style.display = 'none';
+
+      // show start button
+      startButton.style.display = 'block';
+    }
   });
 };
 
 export const pauseTimer = () => {
-  console.log("timer paused");
+  const pauseTime = Date.now();
+
+  clearInterval(timerDisplayInterval);
+
+  state.isTimerRunning = false;
+
+  // hide pause button
+  const pauseButton = document.getElementById('timer-pause-button');
+  pauseButton.style.display = 'none';
+
+  // show start button
+  const startButton = document.getElementById('timer-start-button');
+  startButton.style.display = 'block';
+
+  state.timerTotalPassedMilliseconds = pauseTime - state.timerStartTime;
+
+  reRenderTimerPanel();
 };
 export const resetTimer = () => {
-  console.log("timer reseted");
+  console.log('timer reseted');
 };
 
 export const reRenderTimerPanel = (
@@ -104,16 +123,22 @@ export const reRenderTimerPanel = (
 ) => {
   const formattedTime = getFormattedTime(new Date(date));
 
-  document.getElementById("timer-HRS").innerText = formattedTime.hours;
-  document.getElementById("timer-MIN").innerText = formattedTime.minutes;
-  document.getElementById("timer-SEC").innerText = formattedTime.seconds;
+  const timerHRS = document.getElementById('timer-HRS');
+  const timerMIN = document.getElementById('timer-MIN');
+  const timerSEC = document.getElementById('timer-SEC');
+  const timerChartElement = document.getElementById('timer-chart');
 
-  let percentage =
-    100 -
-    (state.timerTotalPassedMilliseconds /
-      state.timerSettings.getTotalMiliSeconds()) *
-      100;
+  if (timerHRS && timerMIN && timerSEC && timerChartElement) {
+    timerHRS.innerText = formattedTime.hours;
+    timerMIN.innerText = formattedTime.minutes;
+    timerSEC.innerText = formattedTime.seconds;
 
-  const timerChartElement = document.getElementById("timer-chart");
-  timerChartElement.style.background = `conic-gradient(#0d6efd ${percentage}%, white 0)`;
+    let percentage =
+      100 -
+      (state.timerTotalPassedMilliseconds /
+        state.timerSettings.getTotalMiliSeconds()) *
+        100;
+
+    timerChartElement.style.background = `conic-gradient(#0d6efd ${percentage}%, white 0)`;
+  }
 };

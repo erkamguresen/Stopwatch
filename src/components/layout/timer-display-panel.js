@@ -40,8 +40,6 @@ const createTimerClock = () => {
 
   const formattedTimer = getFormattedRemainingTimerTime();
 
-  console.log('formattedTimer', formattedTimer);
-
   timerClock.appendChild(
     createCodeElement(
       'timerDisplay fs-1 text-dark',
