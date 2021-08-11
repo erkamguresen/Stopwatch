@@ -28,7 +28,7 @@ export const startTimer = () => {
   const pauseButton = document.getElementById('timer-pause-button');
   pauseButton.style.display = 'block';
 
-  timerDisplayInterval = setInterval(renderTimerDisplay, 20);
+  timerDisplayInterval = setInterval(renderTimerDisplay, 50);
 };
 
 const renderTimerDisplay = (time = Date.now()) => {
@@ -36,18 +36,38 @@ const renderTimerDisplay = (time = Date.now()) => {
   const timerMIN = document.getElementById('timer-MIN');
   const timerSEC = document.getElementById('timer-SEC');
 
-  console.log(
-    state.timerSettings.getTotalSeconds() - (time - state.timerStartTime)
-  );
+  state.timerTotalPassedMilliseconds = time - state.timerStartTime;
+
   const displayDate = getFormattedTime(
     new Date(
-      state.timerSettings.getTotalSeconds() - (time - state.timerStartTime)
+      state.timerSettings.getTotalMiliSeconds() -
+        state.timerTotalPassedMilliseconds
     )
   );
 
   if (timerSEC) timerSEC.innerText = displayDate.seconds;
   if (timerMIN) timerMIN.innerText = displayDate.minutes;
   if (timerHRS) timerHRS.innerText = displayDate.hours;
+
+  if (
+    state.timerSettings.getTotalMiliSeconds() -
+      state.timerTotalPassedMilliseconds <=
+    0
+  ) {
+    clearInterval(timerDisplayInterval);
+    state.resetTimer();
+    alertTimerFinished();
+    reRenderTimerPanel();
+  }
+};
+
+const alertTimerFinished = () => {
+  //TODO fix alertify etc.
+  console.log('Time is up !');
+  alertify.alert('Time is up !', function () {
+    alertify.console.error();
+    ('Time is up !');
+  });
 };
 
 export const pauseTimer = () => {
@@ -58,6 +78,7 @@ export const resetTimer = () => {
 };
 
 export const reRenderTimerPanel = (
+  // TODO: use formatted time
   hours = state.timerSettings.hours,
   minutes = state.timerSettings.minutes,
   seconds = state.timerSettings.seconds

@@ -33,7 +33,7 @@ export const checkTimerSettings = () => {
   const secElement = document.getElementById('timer-SEC');
 
   const hrs = parseInt(hrsElement.innerText);
-  if (Number.isInteger(hrs) && 0 < hrs && hrs < 100) {
+  if (Number.isInteger(hrs) && 0 < hrs && hrs < 24) {
     state.timerSettings.hours = hrs;
   } else {
     state.timerSettings.hours = 0;
