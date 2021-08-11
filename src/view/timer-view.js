@@ -74,7 +74,7 @@ const renderTimerDisplay = (time = Date.now()) => {
     0
   ) {
     clearInterval(timerDisplayInterval);
-    state.resetTimer();
+
     reRenderTimerPanel();
     alertTimerFinished();
   }
@@ -83,7 +83,8 @@ const renderTimerDisplay = (time = Date.now()) => {
 const alertTimerFinished = () => {
   console.log("Time is up !");
   alertify.alert("Timer Alert", "Time is up !", function () {
-    // alertify.warning('Time is up !');
+    state.resetTimer();
+    reRenderTimerPanel();
   });
 };
 

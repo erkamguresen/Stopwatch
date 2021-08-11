@@ -14,7 +14,7 @@ const getColorRatio = (color) => {
   let percentage = state.getTimerPercentage();
 
   if (percentage < 50) {
-    percentage -= 15;
+    percentage -= 20;
   }
 
   return Math.round(
