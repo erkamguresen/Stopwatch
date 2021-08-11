@@ -13,6 +13,8 @@ export const startStopWatch = () => {
     state.totalPassedTime = null;
   }
 
+  state.isStopwatchRunning = true;
+
   // hide start button
   const startButton = document.getElementById('stopwatch-start-button');
   startButton.style.display = 'none';
@@ -22,8 +24,6 @@ export const startStopWatch = () => {
   pauseButton.style.display = 'block';
 
   displayInterval = setInterval(renderStopWatchDisplay, 13);
-
-  state.isStopwatchRunning = true;
 };
 
 export const pauseStopWatch = () => {
@@ -95,10 +95,10 @@ export const renderStopWatchDisplay = (time = Date.now()) => {
     new Date(time - state.stopwatchStartTime)
   );
 
-  stopwatchMS.innerText = displayDate.milliseconds;
-  stopwatchSEC.innerText = displayDate.seconds;
-  stopwatchMIN.innerText = displayDate.minutes;
-  stopwatchHRS.innerText = displayDate.hours;
+  if (stopwatchMS) stopwatchMS.innerText = displayDate.milliseconds;
+  if (stopwatchSEC) stopwatchSEC.innerText = displayDate.seconds;
+  if (stopwatchMIN) stopwatchMIN.innerText = displayDate.minutes;
+  if (stopwatchHRS) stopwatchHRS.innerText = displayDate.hours;
 };
 
 const resetStopWatchDisplay = () => {

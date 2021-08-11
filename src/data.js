@@ -1,19 +1,20 @@
 export const state = {
   //stopwatch
-  stopwatchStartTime: null,
+  timerStartTime: null,
   isStopwatchRunning: false,
   totalPassedTime: null, //updates when paused or reset
   laps: [], // in milliseconds from start
 
   // reset stopwatch
   resetStopWatch: function () {
-    state.stopwatchStartTime = null;
+    state.timerStartTime = null;
     state.isStopwatchRunning = false;
     state.totalPassedTime = null;
     state.laps = [];
   },
 
   // timer
+  timerStartTime: null,
   isTimerRunning: false,
   timerSettings: {
     hours: 0,
@@ -31,6 +32,7 @@ export const state = {
 
   //reset timer
   resetTimer: function () {
+    state.timerStartTime = null;
     state.isTimerRunning = false;
     state.timerSettings.hours = 0;
     state.timerSettings.minutes = 10;
