@@ -52,7 +52,7 @@ export const stopwatchTab = () => {
   stopwatchTabDiv.appendChild(buttonPanel);
 
   const lapPanel = createDivElement(
-    'd-flex flex-column justify-content-center my-2 p-3 text-center',
+    'd-flex flex-column justify-content-center mt-2 mb-5 p-3 text-center',
     'Laps-panel'
   );
 

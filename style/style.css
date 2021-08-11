@@ -1,5 +1,10 @@
 @import './header.css';
 @import './main.css';
 @import './progress-bar.css';
+@import './footer.css';
 
 @import './alertify.css';
+
+body {
+  background-color: #e8e8e8;
+}
