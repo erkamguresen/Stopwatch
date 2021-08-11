@@ -1,31 +1,31 @@
 @property --percentage {
   initial-value: 100%;
   inherits: false;
-  syntax: '<percentage>';
+  syntax: "<percentage>";
 }
 
 .chart {
   background: conic-gradient(#0d6efd var(--percentage), white 0);
   border-radius: 50%;
-  width: 254px;
-  height: 254px;
+  width: 250px;
+  height: 250px;
 }
 
 .circle {
   background: white;
   /*   border:1px solid yellow; */
-  width: 250px;
-  height: 250px;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
   position: relative;
-  top: 2px;
-  left: 2px;
+  top: 5px;
+  left: 5px;
 }
 
 @media only screen and (min-width: 720px) {
   .chart {
-    width: 304px;
-    height: 304px;
+    width: 310px;
+    height: 310px;
   }
 
   .circle {
@@ -33,17 +33,3 @@
     height: 300px;
   }
 }
-
-/* 
-
-
-JS:
-
-const circle = document.querySelector('.chart');
-
-let percentage = 40;
-
-circle.style.background = `conic-gradient(red ${percentage}%, white 0)`;
-
-
-*/
