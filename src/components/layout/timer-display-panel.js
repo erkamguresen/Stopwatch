@@ -5,7 +5,7 @@ import { createSpanElement } from '../shared/spanElement.js';
 
 export const timerDisplayPanel = () => {
   const displayPanel = createDivElement(
-    'text-center p-5 mb-2 d-flex flex-row justify-content-center',
+    'text-center p-4 mb-2 d-flex flex-row justify-content-center',
     'timer-display'
   );
 
