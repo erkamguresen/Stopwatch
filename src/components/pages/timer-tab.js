@@ -18,7 +18,7 @@ export const timerTab = () => {
   timerTabDiv.appendChild(timerDisplayEl);
 
   const buttonPanel = createDivElement(
-    'd-flex flex-row justify-content-center my-1 p-2',
+    'd-flex flex-row justify-content-center my-2 p-2',
     'timer-button-panel'
   );
 
