@@ -42,6 +42,6 @@ export const state = {
     state.timerSettings.minutes = 10;
     state.timerSettings.seconds = 0;
 
-    state.timerTotalPassedSeconds = 0;
+    state.timerTotalPassedMilliseconds = 0;
   },
 };

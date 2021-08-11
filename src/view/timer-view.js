@@ -49,6 +49,15 @@ const renderTimerDisplay = (time = Date.now()) => {
   if (timerMIN) timerMIN.innerText = displayDate.minutes;
   if (timerHRS) timerHRS.innerText = displayDate.hours;
 
+  let percentage =
+    100 -
+    (state.timerTotalPassedMilliseconds /
+      state.timerSettings.getTotalMiliSeconds()) *
+      100;
+
+  const timerChartElement = document.getElementById('timer-chart');
+  timerChartElement.style.background = `conic-gradient(#0d6efd ${percentage}%, white 0)`;
+
   if (
     state.timerSettings.getTotalMiliSeconds() -
       state.timerTotalPassedMilliseconds <=
@@ -56,17 +65,15 @@ const renderTimerDisplay = (time = Date.now()) => {
   ) {
     clearInterval(timerDisplayInterval);
     state.resetTimer();
-    alertTimerFinished();
     reRenderTimerPanel();
+    alertTimerFinished();
   }
 };
 
 const alertTimerFinished = () => {
-  //TODO fix alertify etc.
   console.log('Time is up !');
-  alertify.alert('Time is up !', function () {
-    alertify.console.error();
-    ('Time is up !');
+  alertify.alert('Timer Alert', 'Time is up !', function () {
+    // alertify.warning('Time is up !');
   });
 };
 
@@ -78,12 +85,24 @@ export const resetTimer = () => {
 };
 
 export const reRenderTimerPanel = (
-  // TODO: use formatted time
-  hours = state.timerSettings.hours,
-  minutes = state.timerSettings.minutes,
-  seconds = state.timerSettings.seconds
+  date = Math.max(
+    state.timerSettings.getTotalMiliSeconds() -
+      state.timerTotalPassedMilliseconds,
+    0
+  )
 ) => {
-  document.getElementById('timer-HRS').innerText = hours;
-  document.getElementById('timer-MIN').innerText = minutes;
-  document.getElementById('timer-SEC').innerText = seconds;
+  const formattedTime = getFormattedTime(new Date(date));
+
+  document.getElementById('timer-HRS').innerText = formattedTime.hours;
+  document.getElementById('timer-MIN').innerText = formattedTime.minutes;
+  document.getElementById('timer-SEC').innerText = formattedTime.seconds;
+
+  let percentage =
+    100 -
+    (state.timerTotalPassedMilliseconds /
+      state.timerSettings.getTotalMiliSeconds()) *
+      100;
+
+  const timerChartElement = document.getElementById('timer-chart');
+  timerChartElement.style.background = `conic-gradient(#0d6efd ${percentage}%, white 0)`;
 };

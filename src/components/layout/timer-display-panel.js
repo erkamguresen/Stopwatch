@@ -9,7 +9,7 @@ export const timerDisplayPanel = () => {
     'timer-display'
   );
 
-  const countDownChart = createDivElement('chart');
+  const countDownChart = createDivElement('chart', 'timer-chart');
 
   const countDownCircle = createDivElement(
     'circle d-flex flex-column justify-content-center'

@@ -1,0 +1,18 @@
+.ajs-modal {
+  background-color: rgba(220, 53, 69, 0.5);
+  /* background-color: rgba(217, 92, 92, 0.5); */
+}
+
+.ajs-dialog,
+.ajs-header,
+.ajs-footer {
+  background-color: #dc3545 !important;
+  /* background-color: rgba(217, 92, 92) !important; */
+  color: #fff !important;
+  font-size: larger;
+}
+.ajs-close {
+  border: 1px solid #fff !important;
+  background-color: #fff !important;
+  border-radius: 2px !important;
+}

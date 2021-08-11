@@ -5,7 +5,7 @@
 }
 
 .chart {
-  background: conic-gradient(DarkTurquoise var(--percentage), white 0);
+  background: conic-gradient(#0d6efd var(--percentage), white 0);
   border-radius: 50%;
   width: 254px;
   height: 254px;
