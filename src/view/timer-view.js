@@ -111,6 +111,19 @@ export const pauseTimer = () => {
   reRenderTimerPanel();
 };
 export const resetTimer = () => {
+  clearInterval(timerDisplayInterval);
+
+  state.resetTimer();
+
+  reRenderTimerPanel();
+
+  // hide pause button
+  const pauseButton = document.getElementById('timer-pause-button');
+  pauseButton.style.display = 'none';
+
+  // show start button
+  const startButton = document.getElementById('timer-start-button');
+  startButton.style.display = 'block';
   console.log('timer reseted');
 };
 

@@ -33,6 +33,7 @@ export const timerEditHandler = (event) => {
   event.stopPropagation();
 
   switch (event.type) {
+    case 'click':
     case 'dblclick':
       if (event.target.tagName === 'CODE') {
         event.target.setAttribute('contentEditable', true);

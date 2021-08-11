@@ -13,6 +13,7 @@ export const timerTab = () => {
 
   const timerDisplayEl = timerDisplayPanel();
   timerDisplayEl.addEventListener('dblclick', timerEditHandler);
+  timerDisplayEl.addEventListener('click', timerEditHandler);
   timerDisplayEl.addEventListener('focusout', timerEditHandler);
   timerTabDiv.appendChild(timerDisplayEl);
 

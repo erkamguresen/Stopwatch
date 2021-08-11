@@ -52,8 +52,6 @@ export const resetStopWatch = () => {
   state.resetStopWatch();
 
   renderStopwatch();
-
-  // console.log(state);
 };
 
 export const addLapStopWatch = () => {
