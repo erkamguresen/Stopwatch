@@ -3,7 +3,7 @@ import { createTimeDiv } from '../shared/timeDivElement.js';
 
 export const stopwatchDisplayPanel = () => {
   const displayPanel = createDivElement(
-    'text-center p-5 mb-2 d-flex flex-row justify-content-center',
+    'text-center p-4 mb-2 d-flex flex-row justify-content-center',
     'stopwatch-display'
   );
 

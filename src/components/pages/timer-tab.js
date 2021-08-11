@@ -9,7 +9,7 @@ import { state } from '../../data.js';
 
 export const timerTab = () => {
   const timerTabDiv = document.createElement('div');
-  timerTabDiv.className = 'mb-3 text-center';
+  timerTabDiv.className = 'mb-2 text-center';
 
   const timerDisplayEl = timerDisplayPanel();
   timerDisplayEl.addEventListener('dblclick', timerEditHandler);
@@ -18,7 +18,7 @@ export const timerTab = () => {
   timerTabDiv.appendChild(timerDisplayEl);
 
   const buttonPanel = createDivElement(
-    'd-flex flex-row justify-content-center my-2 p-2',
+    'd-flex flex-row justify-content-center my-1 p-2',
     'timer-button-panel'
   );
 
