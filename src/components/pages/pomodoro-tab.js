@@ -1,6 +1,6 @@
 import { createButtonElement } from "../shared/buttonElement.js";
 import { createDivElement } from "../shared/divElement.js";
-// import { pomodoroHandler } from "../../handlers/pomodoroHandlers.js";
+// import { pomodoroButtonHandler } from "../../handlers/pomodoroHandlers.js";
 import { pomodoroDisplayPanel } from "../layout/pomodoro-display-panel.js";
 import { state } from "../../data.js";
 
@@ -53,7 +53,7 @@ export const pomodoroTab = () => {
 
   pomodoroTabDiv.appendChild(buttonPanel);
 
-  // pomodoroTabDiv.addEventListener("click", pomodoroHandler);
+  // pomodoroTabDiv.addEventListener("click", pomodoroButtonHandler);
 
   if (state.isPomodoroRunning) {
     startButton.style.display = "none";

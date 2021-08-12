@@ -1,55 +1,24 @@
-import { checkTimerSettings } from '../logic/timeformat.js';
 import {
-  pauseTimer,
-  reRenderTimerPanel,
-  resetTimer,
-  startTimer,
-} from '../view/timer-view.js';
+  pausePomodoro,
+  resetPomodoro,
+  startPomodoro,
+} from "../view/pomodoro-view.js";
 
-export const timerButtonHandler = (event) => {
+export const pomodoroButtonHandler = (event) => {
   event.preventDefault();
   event.stopPropagation();
 
   switch (event.target.id) {
-    case 'timer-start-button':
-      startTimer();
+    case "pomodoro-start-button":
+      startPomodoro();
       break;
 
-    case 'timer-pause-button':
-      pauseTimer();
+    case "pomodoro-pause-button":
+      pausePomodoro();
       break;
 
-    case 'timer-reset-button':
-      resetTimer();
-      break;
-
-    default:
-      break;
-  }
-};
-
-export const timerEditHandler = (event) => {
-  event.preventDefault();
-  event.stopPropagation();
-
-  switch (event.type) {
-    case 'click':
-    case 'dblclick':
-      if (event.target.tagName === 'CODE') {
-        event.target.setAttribute('contentEditable', true);
-      }
-
-      break;
-
-    case 'focusout':
-      if (event.target.tagName === 'CODE') {
-        event.target.setAttribute('contentEditable', true);
-
-        checkTimerSettings();
-
-        reRenderTimerPanel();
-      }
-
+    case "pomodoro-reset-button":
+      resetPomodoro();
       break;
 
     default:

@@ -69,11 +69,11 @@ export const renderStopwatch = () => {
 
   rootDiv.appendChild(stopwatchTab());
 
-  if (state.totalPassedTime !== null) {
+  if (state.stopwatchTotalPassedTimeInMS !== null) {
     console.log(state);
-    console.log(new Date(state.totalPassedTime));
+    console.log(new Date(state.stopwatchTotalPassedTimeInMS));
     renderStopWatchDisplay(
-      new Date(state.stopwatchStartTime + state.totalPassedTime)
+      new Date(state.stopwatchStartTime + state.stopwatchTotalPassedTimeInMS)
     );
   }
 };

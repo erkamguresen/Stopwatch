@@ -2,48 +2,48 @@ import { state } from "../data.js";
 import { getFormattedTime } from "../logic/timeformat.js";
 import { getTimerRingColor } from "../logic/timer-color.js";
 
-let timerDisplayInterval;
+let pomodoroDisplayInterval;
 
-export const startTimer = () => {
-  if (state.timerStartTime === null) {
-    state.timerStartTime = Date.now();
+export const startPomodoro = () => {
+  if (state.pomodoroStartTime === null) {
+    state.pomodoroStartTime = Date.now();
   } else {
-    state.timerStartTime = Date.now() - state.timerTotalPassedMilliseconds;
-    state.timerTotalPassedMilliseconds = null;
+    state.pomodoroStartTime =
+      Date.now() - state.pomodoroTotalPassedMilliseconds;
+    state.pomodoroTotalPassedMilliseconds = null;
   }
 
-  state.isTimerRunning = true;
+  state.isPomodoroRunning = true;
 
   // hide start button
-  const startButton = document.getElementById("timer-start-button");
+  const startButton = document.getElementById("pomodoro-start-button");
   startButton.style.display = "none";
 
   // show pause button
-  const pauseButton = document.getElementById("timer-pause-button");
+  const pauseButton = document.getElementById("pomodoro-pause-button");
   pauseButton.style.display = "block";
 
-  timerDisplayInterval = setInterval(renderTimerDisplay, 50);
+  pomodoroDisplayInterval = setInterval(renderPomodoroDisplay, 50);
 };
 
-const renderTimerDisplay = (time = Date.now()) => {
-  const timerHRS = document.getElementById("timer-HRS");
-  const timerMIN = document.getElementById("timer-MIN");
-  const timerSEC = document.getElementById("timer-SEC");
-  const timerChartElement = document.getElementById("timer-chart");
+const renderPomodoroDisplay = (time = Date.now()) => {
+  const pomodoroHRS = document.getElementById("pomodoro-HRS");
+  const pomodoroMIN = document.getElementById("pomodoro-MIN");
+  const pomodoroSEC = document.getElementById("pomodoro-SEC");
 
-  state.timerTotalPassedMilliseconds = time - state.timerStartTime;
+  state.pomodoroTotalPassedMilliseconds = time - state.pomodoroStartTime;
 
   const displayDate = getFormattedTime(
     new Date(
-      state.timerSettings.getTotalMilliseconds() -
-        state.timerTotalPassedMilliseconds
+      state.pomodoroSettings.getTotalMilliseconds() -
+        state.pomodoroTotalPassedMilliseconds
     )
   );
 
-  if (timerSEC && timerMIN && timerHRS && timerChartElement) {
-    timerHRS.innerText = displayDate.hours;
-    timerMIN.innerText = displayDate.minutes;
-    timerSEC.innerText = displayDate.seconds;
+  if (pomodoroSEC && pomodoroMIN && pomodoroHRS && timerChartElement) {
+    pomodoroHRS.innerText = displayDate.hours;
+    pomodoroMIN.innerText = displayDate.minutes;
+    pomodoroSEC.innerText = displayDate.seconds;
 
     let percentage =
       100 -
@@ -60,11 +60,11 @@ const renderTimerDisplay = (time = Date.now()) => {
   }
 
   if (
-    state.timerSettings.getTotalMilliseconds() -
+    state.timerSettings.getTotalMiliSeconds() -
       state.timerTotalPassedMilliseconds <=
     0
   ) {
-    clearInterval(timerDisplayInterval);
+    clearInterval(pomodoroDisplayInterval);
 
     const soundWarning = document.getElementById("timer-audio");
 
@@ -82,8 +82,8 @@ const alertTimerFinished = (soundWarning) => {
     state.resetTimer();
     reRenderTimerPanel();
 
-    const pauseButton = document.getElementById("timer-pause-button");
-    const startButton = document.getElementById("timer-start-button");
+    const pauseButton = document.getElementById("pomodoro-pause-button");
+    const startButton = document.getElementById("pomodoro-start-button");
 
     if (pauseButton && startButton) {
       // hide pause button
@@ -98,10 +98,10 @@ const alertTimerFinished = (soundWarning) => {
   });
 };
 
-export const pauseTimer = () => {
+export const pausePomodoro = () => {
   const pauseTime = Date.now();
 
-  clearInterval(timerDisplayInterval);
+  clearInterval(pomodoroDisplayInterval);
 
   state.isTimerRunning = false;
 
@@ -113,12 +113,12 @@ export const pauseTimer = () => {
   const startButton = document.getElementById("timer-start-button");
   startButton.style.display = "block";
 
-  state.timerTotalPassedMilliseconds = pauseTime - state.timerStartTime;
+  state.timerTotalPassedMilliseconds = pauseTime - state.pomodoroStartTime;
 
   reRenderTimerPanel();
 };
-export const resetTimer = () => {
-  clearInterval(timerDisplayInterval);
+export const resetPomodoro = () => {
+  clearInterval(pomodoroDisplayInterval);
 
   state.resetTimer();
 
@@ -136,7 +136,7 @@ export const resetTimer = () => {
 
 export const reRenderTimerPanel = (
   date = Math.max(
-    state.timerSettings.getTotalMilliseconds() -
+    state.timerSettings.getTotalMiliSeconds() -
       state.timerTotalPassedMilliseconds,
     0
   )
@@ -156,7 +156,7 @@ export const reRenderTimerPanel = (
     let percentage =
       100 -
       (state.timerTotalPassedMilliseconds /
-        state.timerSettings.getTotalMilliseconds()) *
+        state.timerSettings.getTotalMiliSeconds()) *
         100;
 
     timerChartElement.style.background = `conic-gradient(#0d6efd ${percentage}%, white 0)`;

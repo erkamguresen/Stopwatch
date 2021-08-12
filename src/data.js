@@ -2,14 +2,14 @@ export const state = {
   //stopwatch
   stopwatchStartTime: null,
   isStopwatchRunning: false,
-  totalPassedTime: null, //updates when paused or reset
+  stopwatchTotalPassedTimeInMS: null, //updates when paused or reset
   laps: [], // in milliseconds from start
 
   // reset stopwatch
   resetStopWatch: function () {
     state.stopwatchStartTime = null;
     state.isStopwatchRunning = false;
-    state.totalPassedTime = null;
+    state.stopwatchTotalPassedTimeInMS = null;
     state.laps = [];
   },
 
@@ -28,7 +28,7 @@ export const state = {
       );
     },
 
-    getTotalMiliSeconds: function () {
+    getTotalMilliseconds: function () {
       return state.timerSettings.getTotalSeconds() * 1000;
     },
   },
@@ -38,7 +38,7 @@ export const state = {
     return (
       100 -
       (state.timerTotalPassedMilliseconds /
-        state.timerSettings.getTotalMiliSeconds()) *
+        state.timerSettings.getTotalMilliseconds()) *
         100
     );
   },
@@ -72,7 +72,7 @@ export const state = {
       );
     },
 
-    getTotalMiliSeconds: function () {
+    getTotalMilliseconds: function () {
       return state.pomodoroSettings.getTotalSeconds() * 1000;
     },
   },
@@ -83,8 +83,8 @@ export const state = {
     state.pomodoroStartTime = null;
     state.isPomodoroRunning = false;
     state.pomodoroSettings.hours = 0;
-    state.pomodoroSettings.minutes = 25;
-    state.pomodoroSettings.seconds = 0;
+    state.pomodoroSettings.minutes = 0;
+    state.pomodoroSettings.seconds = 10;
 
     state.pomodoroTotalPassedMilliseconds = 0;
   },
