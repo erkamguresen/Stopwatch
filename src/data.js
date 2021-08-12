@@ -56,6 +56,38 @@ export const state = {
   },
 
   hasTimerSound: false,
+
+  // pomodoro
+  pomodoroStartTime: null,
+  isPomodoroRunning: false,
+  pomodoroSettings: {
+    hours: 0,
+    minutes: 25,
+    seconds: 0,
+    getTotalSeconds: function () {
+      return (
+        state.pomodoroSettings.hours * 60 * 60 +
+        state.pomodoroSettings.minutes * 60 +
+        state.pomodoroSettings.seconds
+      );
+    },
+
+    getTotalMiliSeconds: function () {
+      return state.pomodoroSettings.getTotalSeconds() * 1000;
+    },
+  },
+  pomodoroTotalPassedMilliseconds: 0,
+
+  //reset pomodoro
+  resetPomodoro: function () {
+    state.pomodoroStartTime = null;
+    state.isPomodoroRunning = false;
+    state.pomodoroSettings.hours = 0;
+    state.pomodoroSettings.minutes = 25;
+    state.pomodoroSettings.seconds = 0;
+
+    state.pomodoroTotalPassedMilliseconds = 0;
+  },
 };
 
 export const fixedSettings = {

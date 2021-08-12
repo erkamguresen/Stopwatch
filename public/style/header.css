@@ -17,3 +17,15 @@ nav :hover {
   border-bottom: solid 1px blue;
   cursor: pointer;
 }
+
+nav #pomodoro-tab.active {
+  color: red;
+  border-bottom: solid 1px red;
+}
+
+nav #pomodoro-tab:hover {
+  font-weight: bold;
+  color: red;
+  border-bottom: solid 1px red;
+  cursor: pointer;
+}
