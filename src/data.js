@@ -55,7 +55,7 @@ export const state = {
     state.timerRingColor = { red: 13, green: 110, blue: 253 };
   },
 
-  hasTimerSound: false,
+  hasTimerSound: true,
 
   // pomodoro
   pomodoroStartTime: null,

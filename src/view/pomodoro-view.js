@@ -1,5 +1,7 @@
 import { state } from '../data.js';
+import { renderTimer } from '../init/routes.js';
 import { getFormattedTime } from '../logic/timeformat.js';
+import { startTimer } from './timer-view.js';
 
 let pomodoroDisplayInterval;
 
@@ -55,7 +57,6 @@ const renderPomodoroDisplay = (time = Date.now()) => {
     const soundWarning = document.getElementById('pomodoro-audio');
 
     if (soundWarning) {
-      // if (soundWarning && state.hasPomodoroSound) {
       soundWarning.play();
     }
 
@@ -70,12 +71,25 @@ const alertPomodoroFinished = (soundWarning) => {
     "Enough work, let's have a break! Do you want to take a LONG BREAK?",
     function () {
       pomodoroResetProcedure(soundWarning);
-
       alertify.success('Long Break Then!');
+      setTimeout(function () {
+        state.timerSettings.hours = 0;
+        state.timerSettings.minutes = 15;
+        state.timerSettings.seconds = 0;
+        renderTimer();
+        startTimer();
+      }, 1500);
     },
     function () {
       pomodoroResetProcedure(soundWarning);
       alertify.warning('Short Break Then!');
+      setTimeout(function () {
+        state.timerSettings.hours = 0;
+        state.timerSettings.minutes = 5;
+        state.timerSettings.seconds = 0;
+        renderTimer();
+        startTimer();
+      }, 1500);
     }
   );
 };
