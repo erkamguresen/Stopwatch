@@ -1,10 +1,11 @@
 import { state } from "../data.js";
 import { getFormattedTime } from "../logic/timeformat.js";
-import { getTimerRingColor } from "../logic/timer-color.js";
 
 let pomodoroDisplayInterval;
 
 export const startPomodoro = () => {
+  console.log("startPomodoro");
+
   if (state.pomodoroStartTime === null) {
     state.pomodoroStartTime = Date.now();
   } else {
@@ -40,24 +41,12 @@ const renderPomodoroDisplay = (time = Date.now()) => {
     )
   );
 
-  if (pomodoroSEC && pomodoroMIN && pomodoroHRS && timerChartElement) {
+  if (pomodoroSEC && pomodoroMIN && pomodoroHRS) {
     pomodoroHRS.innerText = displayDate.hours;
     pomodoroMIN.innerText = displayDate.minutes;
     pomodoroSEC.innerText = displayDate.seconds;
 
-    let percentage =
-      100 -
-      (state.timerTotalPassedMilliseconds /
-        state.timerSettings.getTotalMilliseconds()) *
-        100;
-
-    const ringColor = getTimerRingColor();
-
-    timerChartElement.style.background = `conic-gradient(
-    rgb(${ringColor.red}, 
-      ${ringColor.green}, 
-      ${ringColor.blue}) ${percentage}%, white 0)`;
-  }
+    
 
   if (
     state.timerSettings.getTotalMiliSeconds() -
@@ -116,7 +105,8 @@ export const pausePomodoro = () => {
   state.timerTotalPassedMilliseconds = pauseTime - state.pomodoroStartTime;
 
   reRenderTimerPanel();
-};
+  };
+  
 export const resetPomodoro = () => {
   clearInterval(pomodoroDisplayInterval);
 
@@ -135,30 +125,21 @@ export const resetPomodoro = () => {
 };
 
 export const reRenderTimerPanel = (
-  date = Math.max(
-    state.timerSettings.getTotalMiliSeconds() -
+    date = Math.max(
+      state.timerSettings.getTotalMiliSeconds() -
       state.timerTotalPassedMilliseconds,
-    0
-  )
-) => {
-  const formattedTime = getFormattedTime(new Date(date));
+      0
+    )
+  ) => {
+    const formattedTime = getFormattedTime(new Date(date));
 
-  const timerHRS = document.getElementById("timer-HRS");
-  const timerMIN = document.getElementById("timer-MIN");
-  const timerSEC = document.getElementById("timer-SEC");
-  const timerChartElement = document.getElementById("timer-chart");
+    const timerHRS = document.getElementById("timer-HRS");
+    const timerMIN = document.getElementById("timer-MIN");
+    const timerSEC = document.getElementById("timer-SEC");
 
-  if (timerHRS && timerMIN && timerSEC && timerChartElement) {
-    timerHRS.innerText = formattedTime.hours;
-    timerMIN.innerText = formattedTime.minutes;
-    timerSEC.innerText = formattedTime.seconds;
-
-    let percentage =
-      100 -
-      (state.timerTotalPassedMilliseconds /
-        state.timerSettings.getTotalMiliSeconds()) *
-        100;
-
-    timerChartElement.style.background = `conic-gradient(#0d6efd ${percentage}%, white 0)`;
-  }
-};
+    if (timerHRS && timerMIN && timerSEC) {
+      timerHRS.innerText = formattedTime.hours;
+      timerMIN.innerText = formattedTime.minutes;
+      timerSEC.innerText = formattedTime.seconds;
+    };
+  };
