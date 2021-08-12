@@ -62,8 +62,8 @@ export const state = {
   isPomodoroRunning: false,
   pomodoroSettings: {
     hours: 0,
-    minutes: 25,
-    seconds: 0,
+    minutes: 0,
+    seconds: 10,
     getTotalSeconds: function () {
       return (
         state.pomodoroSettings.hours * 60 * 60 +
@@ -88,6 +88,8 @@ export const state = {
 
     state.pomodoroTotalPassedMilliseconds = 0;
   },
+
+  hasPomodoroSound: false,
 };
 
 export const fixedSettings = {
