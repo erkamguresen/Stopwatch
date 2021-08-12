@@ -1,11 +1,9 @@
-import { state } from "../data.js";
-import { getFormattedTime } from "../logic/timeformat.js";
+import { state } from '../data.js';
+import { getFormattedTime } from '../logic/timeformat.js';
 
 let pomodoroDisplayInterval;
 
 export const startPomodoro = () => {
-  console.log("startPomodoro");
-
   if (state.pomodoroStartTime === null) {
     state.pomodoroStartTime = Date.now();
   } else {
@@ -17,20 +15,20 @@ export const startPomodoro = () => {
   state.isPomodoroRunning = true;
 
   // hide start button
-  const startButton = document.getElementById("pomodoro-start-button");
-  startButton.style.display = "none";
+  const startButton = document.getElementById('pomodoro-start-button');
+  startButton.style.display = 'none';
 
   // show pause button
-  const pauseButton = document.getElementById("pomodoro-pause-button");
-  pauseButton.style.display = "block";
+  const pauseButton = document.getElementById('pomodoro-pause-button');
+  pauseButton.style.display = 'block';
 
   pomodoroDisplayInterval = setInterval(renderPomodoroDisplay, 50);
 };
 
 const renderPomodoroDisplay = (time = Date.now()) => {
-  const pomodoroHRS = document.getElementById("pomodoro-HRS");
-  const pomodoroMIN = document.getElementById("pomodoro-MIN");
-  const pomodoroSEC = document.getElementById("pomodoro-SEC");
+  const pomodoroHRS = document.getElementById('pomodoro-HRS');
+  const pomodoroMIN = document.getElementById('pomodoro-MIN');
+  const pomodoroSEC = document.getElementById('pomodoro-SEC');
 
   state.pomodoroTotalPassedMilliseconds = time - state.pomodoroStartTime;
 
@@ -45,46 +43,60 @@ const renderPomodoroDisplay = (time = Date.now()) => {
     pomodoroHRS.innerText = displayDate.hours;
     pomodoroMIN.innerText = displayDate.minutes;
     pomodoroSEC.innerText = displayDate.seconds;
-
-    
+  }
 
   if (
-    state.timerSettings.getTotalMiliSeconds() -
-      state.timerTotalPassedMilliseconds <=
+    state.pomodoroSettings.getTotalMilliseconds() -
+      state.pomodoroTotalPassedMilliseconds <=
     0
   ) {
     clearInterval(pomodoroDisplayInterval);
 
-    const soundWarning = document.getElementById("timer-audio");
+    const soundWarning = document.getElementById('pomodoro-audio');
 
-    if (soundWarning && state.hasTimerSound) {
+    if (soundWarning) {
+      // if (soundWarning && state.hasPomodoroSound) {
       soundWarning.play();
     }
 
-    reRenderTimerPanel();
-    alertTimerFinished(soundWarning);
+    reRenderPomodoroPanel();
+    alertPomodoroFinished(soundWarning);
   }
 };
 
-const alertTimerFinished = (soundWarning) => {
-  alertify.alert("Timer Alert", "Time is up !", function () {
-    state.resetTimer();
-    reRenderTimerPanel();
+const alertPomodoroFinished = (soundWarning) => {
+  alertify.confirm(
+    'Pomodoro Alert',
+    "Enough work, let's have a break! Do you want to take a LONG BREAK?",
+    function () {
+      pomodoroResetProcedure(soundWarning);
 
-    const pauseButton = document.getElementById("pomodoro-pause-button");
-    const startButton = document.getElementById("pomodoro-start-button");
-
-    if (pauseButton && startButton) {
-      // hide pause button
-      pauseButton.style.display = "none";
-
-      // show start button
-      startButton.style.display = "block";
+      alertify.success('Long Break Then!');
+    },
+    function () {
+      pomodoroResetProcedure(soundWarning);
+      alertify.warning('Short Break Then!');
     }
+  );
+};
 
-    soundWarning.pause();
-    soundWarning.currentTime = 0;
-  });
+const pomodoroResetProcedure = (soundWarning) => {
+  state.resetPomodoro();
+  reRenderPomodoroPanel();
+
+  const pauseButton = document.getElementById('pomodoro-pause-button');
+  const startButton = document.getElementById('pomodoro-start-button');
+
+  if (pauseButton && startButton) {
+    // hide pause button
+    pauseButton.style.display = 'none';
+
+    // show start button
+    startButton.style.display = 'block';
+  }
+
+  soundWarning.pause();
+  soundWarning.currentTime = 0;
 };
 
 export const pausePomodoro = () => {
@@ -92,54 +104,54 @@ export const pausePomodoro = () => {
 
   clearInterval(pomodoroDisplayInterval);
 
-  state.isTimerRunning = false;
+  state.isPomodoroRunning = false;
 
   // hide pause button
-  const pauseButton = document.getElementById("timer-pause-button");
-  pauseButton.style.display = "none";
+  const pauseButton = document.getElementById('pomodoro-pause-button');
+  pauseButton.style.display = 'none';
 
   // show start button
-  const startButton = document.getElementById("timer-start-button");
-  startButton.style.display = "block";
+  const startButton = document.getElementById('pomodoro-start-button');
+  startButton.style.display = 'block';
 
-  state.timerTotalPassedMilliseconds = pauseTime - state.pomodoroStartTime;
+  state.pomodoroTotalPassedMilliseconds = pauseTime - state.pomodoroStartTime;
 
-  reRenderTimerPanel();
-  };
-  
+  reRenderPomodoroPanel();
+};
+
 export const resetPomodoro = () => {
   clearInterval(pomodoroDisplayInterval);
 
-  state.resetTimer();
+  state.resetPomodoro();
 
-  reRenderTimerPanel();
+  reRenderPomodoroPanel();
 
   // hide pause button
-  const pauseButton = document.getElementById("timer-pause-button");
-  pauseButton.style.display = "none";
+  const pauseButton = document.getElementById('pomodoro-pause-button');
+  pauseButton.style.display = 'none';
 
   // show start button
-  const startButton = document.getElementById("timer-start-button");
-  startButton.style.display = "block";
-  console.log("timer reseted");
+  const startButton = document.getElementById('pomodoro-start-button');
+  startButton.style.display = 'block';
+  console.log('pomodoro reseted');
 };
 
-export const reRenderTimerPanel = (
-    date = Math.max(
-      state.timerSettings.getTotalMiliSeconds() -
-      state.timerTotalPassedMilliseconds,
-      0
-    )
-  ) => {
-    const formattedTime = getFormattedTime(new Date(date));
+export const reRenderPomodoroPanel = (
+  date = Math.max(
+    state.pomodoroSettings.getTotalMilliseconds() -
+      state.pomodoroTotalPassedMilliseconds,
+    0
+  )
+) => {
+  const formattedTime = getFormattedTime(new Date(date));
 
-    const timerHRS = document.getElementById("timer-HRS");
-    const timerMIN = document.getElementById("timer-MIN");
-    const timerSEC = document.getElementById("timer-SEC");
+  const pomodoroHRS = document.getElementById('pomodoro-HRS');
+  const pomodoroMIN = document.getElementById('pomodoro-MIN');
+  const pomodoroSEC = document.getElementById('pomodoro-SEC');
 
-    if (timerHRS && timerMIN && timerSEC) {
-      timerHRS.innerText = formattedTime.hours;
-      timerMIN.innerText = formattedTime.minutes;
-      timerSEC.innerText = formattedTime.seconds;
-    };
-  };
+  if (pomodoroHRS && pomodoroMIN && pomodoroSEC) {
+    pomodoroHRS.innerText = formattedTime.hours;
+    pomodoroMIN.innerText = formattedTime.minutes;
+    pomodoroSEC.innerText = formattedTime.seconds;
+  }
+};
