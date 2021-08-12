@@ -66,12 +66,18 @@ const renderTimerDisplay = (time = Date.now()) => {
   ) {
     clearInterval(timerDisplayInterval);
 
+    const soundWarning = document.getElementById("timer-audio");
+
+    if (soundWarning && state.hasTimerSound) {
+      soundWarning.play();
+    }
+
     reRenderTimerPanel();
-    alertTimerFinished();
+    alertTimerFinished(soundWarning);
   }
 };
 
-const alertTimerFinished = () => {
+const alertTimerFinished = (soundWarning) => {
   alertify.alert("Timer Alert", "Time is up !", function () {
     state.resetTimer();
     reRenderTimerPanel();
@@ -86,6 +92,9 @@ const alertTimerFinished = () => {
       // show start button
       startButton.style.display = "block";
     }
+
+    soundWarning.pause();
+    soundWarning.currentTime = 0;
   });
 };
 
