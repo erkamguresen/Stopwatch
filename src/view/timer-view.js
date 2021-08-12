@@ -1,6 +1,6 @@
-import { state } from '../data.js';
-import { getFormattedTime } from '../logic/timeformat.js';
-import { getTimerRingColor } from '../logic/timer-color.js';
+import { state } from "../data.js";
+import { getFormattedTime } from "../logic/timeformat.js";
+import { getTimerRingColor } from "../logic/timer-color.js";
 
 let timerDisplayInterval;
 
@@ -15,21 +15,21 @@ export const startTimer = () => {
   state.isTimerRunning = true;
 
   // hide start button
-  const startButton = document.getElementById('timer-start-button');
-  startButton.style.display = 'none';
+  const startButton = document.getElementById("timer-start-button");
+  startButton.style.display = "none";
 
   // show pause button
-  const pauseButton = document.getElementById('timer-pause-button');
-  pauseButton.style.display = 'block';
+  const pauseButton = document.getElementById("timer-pause-button");
+  pauseButton.style.display = "block";
 
   timerDisplayInterval = setInterval(renderTimerDisplay, 50);
 };
 
 const renderTimerDisplay = (time = Date.now()) => {
-  const timerHRS = document.getElementById('timer-HRS');
-  const timerMIN = document.getElementById('timer-MIN');
-  const timerSEC = document.getElementById('timer-SEC');
-  const timerChartElement = document.getElementById('timer-chart');
+  const timerHRS = document.getElementById("timer-HRS");
+  const timerMIN = document.getElementById("timer-MIN");
+  const timerSEC = document.getElementById("timer-SEC");
+  const timerChartElement = document.getElementById("timer-chart");
 
   state.timerTotalPassedMilliseconds = time - state.timerStartTime;
 
@@ -41,8 +41,6 @@ const renderTimerDisplay = (time = Date.now()) => {
   );
 
   if (timerSEC && timerMIN && timerHRS && timerChartElement) {
-    console.log(displayDate);
-
     timerHRS.innerText = displayDate.hours;
     timerMIN.innerText = displayDate.minutes;
     timerSEC.innerText = displayDate.seconds;
@@ -74,19 +72,19 @@ const renderTimerDisplay = (time = Date.now()) => {
 };
 
 const alertTimerFinished = () => {
-  alertify.alert('Timer Alert', 'Time is up !', function () {
+  alertify.alert("Timer Alert", "Time is up !", function () {
     state.resetTimer();
     reRenderTimerPanel();
 
-    const pauseButton = document.getElementById('timer-pause-button');
-    const startButton = document.getElementById('timer-start-button');
+    const pauseButton = document.getElementById("timer-pause-button");
+    const startButton = document.getElementById("timer-start-button");
 
     if (pauseButton && startButton) {
       // hide pause button
-      pauseButton.style.display = 'none';
+      pauseButton.style.display = "none";
 
       // show start button
-      startButton.style.display = 'block';
+      startButton.style.display = "block";
     }
   });
 };
@@ -99,12 +97,12 @@ export const pauseTimer = () => {
   state.isTimerRunning = false;
 
   // hide pause button
-  const pauseButton = document.getElementById('timer-pause-button');
-  pauseButton.style.display = 'none';
+  const pauseButton = document.getElementById("timer-pause-button");
+  pauseButton.style.display = "none";
 
   // show start button
-  const startButton = document.getElementById('timer-start-button');
-  startButton.style.display = 'block';
+  const startButton = document.getElementById("timer-start-button");
+  startButton.style.display = "block";
 
   state.timerTotalPassedMilliseconds = pauseTime - state.timerStartTime;
 
@@ -118,13 +116,13 @@ export const resetTimer = () => {
   reRenderTimerPanel();
 
   // hide pause button
-  const pauseButton = document.getElementById('timer-pause-button');
-  pauseButton.style.display = 'none';
+  const pauseButton = document.getElementById("timer-pause-button");
+  pauseButton.style.display = "none";
 
   // show start button
-  const startButton = document.getElementById('timer-start-button');
-  startButton.style.display = 'block';
-  console.log('timer reseted');
+  const startButton = document.getElementById("timer-start-button");
+  startButton.style.display = "block";
+  console.log("timer reseted");
 };
 
 export const reRenderTimerPanel = (
@@ -136,10 +134,10 @@ export const reRenderTimerPanel = (
 ) => {
   const formattedTime = getFormattedTime(new Date(date));
 
-  const timerHRS = document.getElementById('timer-HRS');
-  const timerMIN = document.getElementById('timer-MIN');
-  const timerSEC = document.getElementById('timer-SEC');
-  const timerChartElement = document.getElementById('timer-chart');
+  const timerHRS = document.getElementById("timer-HRS");
+  const timerMIN = document.getElementById("timer-MIN");
+  const timerSEC = document.getElementById("timer-SEC");
+  const timerChartElement = document.getElementById("timer-chart");
 
   if (timerHRS && timerMIN && timerSEC && timerChartElement) {
     timerHRS.innerText = formattedTime.hours;

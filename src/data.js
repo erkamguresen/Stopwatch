@@ -18,8 +18,8 @@ export const state = {
   isTimerRunning: false,
   timerSettings: {
     hours: 0,
-    minutes: 10,
-    seconds: 0,
+    minutes: 0,
+    seconds: 10,
     getTotalSeconds: function () {
       return (
         state.timerSettings.hours * 60 * 60 +
@@ -54,6 +54,8 @@ export const state = {
     state.timerTotalPassedMilliseconds = 0;
     state.timerRingColor = { red: 13, green: 110, blue: 253 };
   },
+
+  hasTimerSound: false,
 };
 
 export const fixedSettings = {
