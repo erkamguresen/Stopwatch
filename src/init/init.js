@@ -10,7 +10,10 @@ document.getElementById('root').appendChild(stopwatchTab());
 
 const timerAudio = [
   { src: '../../public/sound/Timer-Sound-Effect.ogg', type: 'audio/ogg' },
-  { src: '../../public/sound/Timer-Sound-Effect.mp3', type: 'audio/mpeg' },
+  {
+    src: '../../../Stopwatch/public/sound/Timer-Sound-Effect.mp3',
+    type: 'audio/mpeg',
+  },
 ];
 
 document
